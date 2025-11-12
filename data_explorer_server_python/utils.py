@@ -8,7 +8,7 @@ import pandas as pd
 
 
 def to_python_value(value: Any) -> Any:
-    """Convert pandas/numpy scalars into JSON-serialisable Python primitives."""
+    """Convert pandas/numpy scalars into JSON-serializable Python primitives."""
     if value is None:
         return None
 
