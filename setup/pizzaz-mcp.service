@@ -1,0 +1,19 @@
+[Unit]
+Description=Pizzaz MCP Server
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/pizzaz-mcp/pizzaz_server_node
+Environment="PATH=/home/ubuntu/.local/share/pnpm:/usr/local/bin:/usr/bin:/bin"
+Environment="PORT=8001"
+ExecStart=/home/ubuntu/.local/share/pnpm/pnpm start
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=pizzaz-mcp
+
+[Install]
+WantedBy=multi-user.target
