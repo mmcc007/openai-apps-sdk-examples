@@ -1,0 +1,21 @@
+[Unit]
+Description=SSH Reverse Tunnel for Pizzaz MCP Server
+After=network.target
+
+[Service]
+Type=simple
+User=mmcc
+Restart=always
+RestartSec=10
+StartLimitIntervalSec=0
+
+# SSH tunnel to VM at 46.224.27.7
+# Maps: VM:8080 → local:8000 (MCP server)
+# Maps: VM:8081 → local:4444 (Asset server)
+ExecStart=/usr/bin/ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=3 -o ExitOnForwardFailure=yes -N -R 8080:localhost:8000 -R 8081:localhost:4444 -i /home/mmcc/.ssh/id_rsa ubuntu@46.224.27.7
+
+# Graceful shutdown
+ExecStop=/bin/kill -TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target
