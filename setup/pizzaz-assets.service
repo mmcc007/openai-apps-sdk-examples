@@ -1,0 +1,18 @@
+[Unit]
+Description=Pizzaz Assets Server
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/pizzaz-mcp
+Environment="PATH=/home/ubuntu/.local/share/pnpm:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/home/ubuntu/.local/share/pnpm/pnpm -w run serve
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=pizzaz-assets
+
+[Install]
+WantedBy=multi-user.target
